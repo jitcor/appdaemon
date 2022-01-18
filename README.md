@@ -8,4 +8,5 @@ su
 cd /data/local/tmp/
 chmod +x ./appdaemon
 ./appdaemon your.app.package.name/your.app.package.name
+./appdaemon your.app.package.name/your.app.package.name& //run in the background
 ```
