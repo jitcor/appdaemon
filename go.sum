@@ -10,6 +10,8 @@ github.com/Humenger/go-devcommon v0.0.0-20220118085438-93a892ac605e h1:BpJ1nPhKW
 github.com/Humenger/go-devcommon v0.0.0-20220118085438-93a892ac605e/go.mod h1:J+O81hxRM7ExtfJpwmpVzTtZwxGg5NXFmVU11z3Pn9E=
 github.com/Humenger/go-devcommon v0.0.0-20220118095347-a2409a2f2dca h1:XBGpp/evJqMJRQXw8BOgHoIwRM+GNrNhE5mUTDqiPlg=
 github.com/Humenger/go-devcommon v0.0.0-20220118095347-a2409a2f2dca/go.mod h1:J+O81hxRM7ExtfJpwmpVzTtZwxGg5NXFmVU11z3Pn9E=
+github.com/Humenger/go-devcommon v0.0.0-20220119060944-472cbe8f4b34 h1:Cnv2Xw3bdvb6RHT1nE9vCAP0JTE2+ynsEvsaM6q1yjU=
+github.com/Humenger/go-devcommon v0.0.0-20220119060944-472cbe8f4b34/go.mod h1:J+O81hxRM7ExtfJpwmpVzTtZwxGg5NXFmVU11z3Pn9E=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/go-ini/ini v1.62.0/go.mod h1:ByCAeIL28uOIIG0E3PJtZPDL8WnHpFKFOtgjp+3Ies8=
 github.com/google/uuid v1.3.0 h1:t6JiXgmwXMjEs8VusXIJk2BXHsn+wx8BZdTaoZ5fu7I=
