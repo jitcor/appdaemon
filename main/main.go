@@ -1,7 +1,10 @@
 package main
 
-import "appdaemon"
+import (
+	"appdaemon"
+	"time"
+)
 
 func main() {
-	appdaemon.Start()
+	new(appdaemon.DualProcessGuard).SetInterval(7*time.Second).Start(appdaemon.Start)
 }

@@ -4,6 +4,7 @@ import (
 	"github.com/Humenger/go-devcommon/dcshell"
 	"log"
 	"os"
+	"path/filepath"
 	"strings"
 	"time"
 )
@@ -14,24 +15,25 @@ func Start() {
 		packageNames := strings.Split(os.Args[1], "/")
 		log.Println("packageNames:", packageNames)
 		for {
-			daemonAppImpl(packageNames, dcShell)
+			daemonAppImplChatGPT(packageNames, dcShell)
 		}
 	} else if len(os.Args) == 3 {
 		if os.Args[1]!="-s"{
-			log.Fatalln("appdaemon -s package:port/package:port")
+			log.Fatalln(filepath.Base(os.Args[0])+" -s package:port/package:port")
 			return
 		}
 		packagePorts := strings.Split(os.Args[2], "/")
 		log.Println("packagePorts:", packagePorts)
 		for {
-			daemonServerImpl(packagePorts, dcShell)
+			daemonServerImplChatGPT(packagePorts, dcShell)
 		}
 	} else {
-		log.Fatalln("appdaemon has must arg")
+		log.Fatalln(filepath.Base(os.Args[0])+" has must arg")
 		return
 	}
 
 }
+
 
 func checkDebug() bool {
 	for _, env := range os.Environ() {
@@ -58,10 +60,22 @@ func daemonAppImpl(packages []string, shell *dcshell.DcShell) {
 	}()
 	for _, pkgName := range packages {
 		if !shell.LaunchAppWhenStopped(pkgName) {
-			log.Println("launch app failed:", pkgName)
+			log.Println("daemonAppImpl launch app failed:", pkgName)
 		}
 	}
 	time.Sleep(100 * time.Millisecond)
+}
+func daemonAppImplChatGPT(packages []string, shell *dcshell.DcShell) {
+	for {
+		select {
+		case <-time.After(13*time.Second):
+			for _, pkgName := range packages {
+				if !shell.LaunchAppWhenStopped(pkgName) {
+					log.Println("daemonAppImplChatGPT launch app failed:", pkgName)
+				}
+			}
+		}
+	}
 }
 func daemonServerImpl(packagePorts []string, shell *dcshell.DcShell) {
 	defer func() {
@@ -74,10 +88,27 @@ func daemonServerImpl(packagePorts []string, shell *dcshell.DcShell) {
 		port:=strings.Split(packagePort,":")[1]
 		if !shell.CheckPortIsListen(port){
 			if !shell.LaunchApp(pkg) {
-				log.Println("launch app failed:", pkg)
+				log.Println("daemonServerImpl launch app failed:", pkg)
 			}
 		}
 
 	}
 	time.Sleep(100 * time.Millisecond)
+}
+
+func daemonServerImplChatGPT(packagePorts []string, shell *dcshell.DcShell) {
+	for {
+		select {
+		case <-time.After(13*time.Second):
+			for _, packagePort := range packagePorts {
+				pkg:=strings.Split(packagePort,":")[0]
+				port:=strings.Split(packagePort,":")[1]
+				if !shell.CheckPortIsListen(port){
+					if !shell.LaunchApp(pkg) {
+						log.Println("daemonServerImplChatGPT launch app failed:", pkg)
+					}
+				}
+			}
+		}
+	}
 }
